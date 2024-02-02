@@ -1,0 +1,35 @@
+﻿@page
+<div id="nicknamePrompt" class="nickname-prompt centered-container">
+	<input type="text" id="nicknameInput" class="nickname-input-field" placeholder="Enter your nickname" />
+	<button type="button" id="startChatButton" class="nickname-button">Start Chat</button>
+</div>
+
+<div id="roomEntry" class="room-entry centered-container">
+	<input type="text" id="roomCodeInput" class="room-code-input" placeholder="Enter Room Code" />
+	<button id="joinRoomButton" class="room-button">Join Room</button>
+	<button id="createRoomButton" class="room-button">Create Room</button>
+</div>
+
+<div id="chatContainer" class="chat-container">
+	<div class="chat-header">
+		Chat Room (<span id="roomCode"> roomCode </span>)
+		<button id="menuButton" class="menu-button">&#9776;</button> <!-- 메뉴 버튼 -->
+	</div>
+	<!-- 사용자 목록 -->
+	<div id="userList" class="user-list">
+		<ul id="userListItems"></ul> <!-- 사용자 목록 아이템을 추가할 리스트 -->
+	</div>
+	<div class="messages-area">
+		<ul id="messagesList"></ul>
+	</div>
+	<div class="chat-input-area">
+		<input type="text" id="messageInput" class="chat-input-field" placeholder="Type a message..." />
+		<button type="button" id="sendButton">Send</button>
+		<button type="button" id="reconnectButton">Reconnect</button>
+	</div>
+</div>
+
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+@* <script src="~/js/chat.js"></script> *@
+
+<script src="~/js/chatting.js"></script>

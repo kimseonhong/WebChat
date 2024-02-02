@@ -1,0 +1,206 @@
+﻿/* Chat Container & Window */
+.chat-container {
+	display: none; /* Initially hidden */
+	width: 100%;
+	max-width: 500px;
+	margin: auto;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	border-radius: 10px;
+	overflow: hidden;
+	background-color: #fff;
+	position: relative; /* 상대적 위치 지정 */
+}
+
+.chat-header {
+	position: relative; /* 메뉴 버튼을 위한 상대적 위치 */
+	width: 100%;
+	padding: 15px;
+	background-color: #4a76a8;
+	color: white;
+	font-size: 18px;
+	text-align: center;
+}
+
+.messages-area {
+	flex-grow: 1;
+	padding: 15px;
+	height: calc(100vh - 130px); /* Adjust based on header and input area */
+	overflow-y: auto;
+	flex-direction: column-reverse;
+	display: flex;
+	background-color: #e5e5e5;
+}
+
+/* Messages List & Individual Messages */
+#messagesList {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.message-container {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.my-message, .other-message {
+	display: flex;
+}
+
+	.my-message > li, .other-message > li {
+		max-width: 70%;
+		background-color: #d1e7fd;
+		color: #333;
+		padding: 8px 12px;
+		border-radius: 20px;
+		margin-bottom: 4px;
+		display: flex;
+		flex-direction: column;
+	}
+
+.timestamp {
+	font-size: 0.75em;
+	color: #666; /* Default color for timestamps */
+	align-self: flex-end; /* Ensure the timestamp is aligned to the right of the message */
+	margin-top: 2px;
+}
+
+.my-message > li {
+	background-color: #4a76a8;
+	color: white;
+	align-self: flex-end; /* Aligns my messages to the right */
+}
+
+.my-message .timestamp {
+	color: white; /* Specific color for timestamps in my messages */
+}
+
+.other-message > li {
+	background-color: #f1f1f1;
+	color: #333;
+	align-self: flex-start; /* Aligns other people's messages to the left */
+}
+
+.nickname-label {
+	font-size: 0.75em;
+	color: #333; /* Keeping nickname color as black */
+	text-align: right; /* Aligns nickname label to the right */
+	margin-bottom: 2px; /* Small space between nickname and message box */
+}
+
+/* Aligns nickname labels for the user's messages to the right */
+.my-message .nickname-label {
+	text-align: right;
+}
+
+/* Aligns nickname labels for others' messages to the left */
+.other-message .nickname-label {
+	text-align: left;
+}
+
+
+.system-message {
+	display: flex;
+	justify-content: center; /* Center system messages in the chat */
+	width: 100%;
+	padding: 8px 0; /* Add some padding above and below the message */
+}
+
+	.system-message > li {
+		color: #333; /* Ensures text is black for visibility */
+		font-size: 0.9em; /* Slightly smaller font size for system messages */
+		font-style: italic; /* Optional: italicize system messages */
+		background-color: transparent; /* Ensure no background for system messages */
+		border: none; /* No border for system messages */
+		padding: 0; /* Reset padding for system message list items */
+		margin: 0; /* Reset margin for system message list items */
+	}
+
+
+
+/* Input Area Styles */
+.chat-input-area {
+	display: flex;
+	width: 100%;
+	padding: 10px;
+	background-color: #fff;
+	border-top: 1px solid #ddd;
+}
+
+.chat-input-field {
+	flex-grow: 1;
+	margin-right: 8px;
+}
+
+#sendButton {
+	padding: 10px 20px;
+	background-color: #5cb85c;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+	#sendButton:hover {
+		background-color: #4cae4c;
+	}
+
+#reconnectButton {
+	padding: 10px 20px;
+	background-color: #5cb85c;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+	#reconnectButton:hover {
+		background-color: #4cae4c;
+	}
+
+
+
+/* Menu */
+.menu-button {
+	position: absolute;
+	right: 10px;
+	top: 50%; /* 채팅 헤더 중앙에 맞춤 */
+	transform: translateY(-50%);
+	background: none;
+	border: none;
+	font-size: 24px;
+	color: white;
+	cursor: pointer;
+}
+
+	.menu-button:focus {
+		outline: none;
+	}
+
+.menu-icon {
+	display: block;
+}
+
+.user-list {
+	display: none;
+	position: absolute;
+	right: 0;
+	top: 57px; /* 채팅 헤더의 높이에 맞춤 */
+	width: 100%;
+	max-height: calc(100% - 57px); /* 채팅 헤더의 높이를 제외한 높이 */
+	overflow-y: auto;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 10;
+	padding: 10px;
+	box-sizing: border-box;
+}
+
+	.user-list li {
+		color: white; /* 사용자 닉네임은 흰색으로 */
+		padding: 5px;
+		border-bottom: 1px solid #ddd; /* 각 아이템을 구분하기 위한 하단 테두리 */
+	}
