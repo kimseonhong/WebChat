@@ -1,8 +1,15 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using System.Linq;
 
-namespace WebChatServer.Hubs
+namespace ChatServer.Hubs
 {
+	public enum MessageType
+	{
+		Text,
+		Image,
+		File
+	}
+
 	public class User
 	{
 		public string ConnectionId { get; set; } = string.Empty;
@@ -142,17 +149,42 @@ namespace WebChatServer.Hubs
 			await base.OnDisconnectedAsync(exception);
 		}
 
-		public async Task SendMessage(string roomCode, string user, string message, string time)
+		public async Task SendMessage(string roomCode, string user, string data, string time)
 		{
 			if (Rooms.ContainsKey(roomCode))
 			{
-				await Clients.Group(roomCode).SendAsync("ReceiveMessage", user, message, time);
+				await Clients.Group(roomCode).SendAsync("ReceiveMessage", user, data, "", MessageType.Text.ToString(), time);
 				return;
 			}
 
 			await Clients.Caller.SendAsync("ReceiveAlertMessage", "방이 존재하지 않습니다.", DateTime.UtcNow.ToString("o"));
 		}
+
+		public async Task SendImage(string roomCode, string user, string data, string fileName, string time)
+		{
+			if (Rooms.ContainsKey(roomCode))
+			{
+				// 클라이언트로부터 받은 이미지(Base64 문자열)를 해당 방의 모든 사용자에게 전송
+				await Clients.Group(roomCode).SendAsync("ReceiveMessage", user, data, fileName, MessageType.Image.ToString(), time);
+				return;
+			}
+
+			await Clients.Caller.SendAsync("ReceiveAlertMessage", "방이 존재하지 않습니다.", DateTime.UtcNow.ToString("o"));
+		}
+
+		public async Task SendFile(string roomCode, string user, string data, string fileName, string time)
+		{
+			if (Rooms.ContainsKey(roomCode))
+			{
+				// 클라이언트로부터 받은 이미지(Base64 문자열)를 해당 방의 모든 사용자에게 전송
+				await Clients.Group(roomCode).SendAsync("ReceiveMessage", user, data, fileName, MessageType.File.ToString(), time);
+				return;
+			}
+
+			await Clients.Caller.SendAsync("ReceiveAlertMessage", "방이 존재하지 않습니다.", DateTime.UtcNow.ToString("o"));
+		}
+
+
 	}
 
 }
-

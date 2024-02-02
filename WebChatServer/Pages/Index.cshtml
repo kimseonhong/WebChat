@@ -22,14 +22,33 @@
 	<div class="messages-area">
 		<ul id="messagesList"></ul>
 	</div>
+	<!-- 단일 프로그레스 바만 표시 -->
+	<div id="progressContainer">
+		<progress id="uploadProgress" value="0" max="100" style="width: 100%; display: none"></progress>
+	</div>
 	<div class="chat-input-area">
-		<input type="text" id="messageInput" class="chat-input-field" placeholder="Type a message..." />
+		@* <textarea id="messageInput" class="chat-input-field" placeholder="Type a message..." rows="1"></textarea> *@
+
+		<textarea id="messageInput" class="chat-input-field" placeholder="Type a message..." rows="3"></textarea>
+
+		@* <input type="text" id="messageInput" class="chat-input-field" placeholder="Type a message..." /> *@
+
+		<!-- 파일 입력 필드: 모든 타입의 파일 선택 허용 -->
+		<input type="file" id="fileInput" class="file-input-field" multiple style="display: none;" />
+		<label id="fileInputButton" for="fileInput" class="file-upload-label">📁</label>
+
 		<button type="button" id="sendButton">Send</button>
 		<button type="button" id="reconnectButton">Reconnect</button>
 	</div>
 </div>
 
-<script src="~/js/signalr/dist/browser/signalr.js"></script>
-@* <script src="~/js/chat.js"></script> *@
+<!-- 이미지 확대를 위한 모달 -->
+<div id="imageModal" class="modal" style="display: none">
+	<span class="close">&times;</span>
+	<img class="modal-content" id="modalImage">
+	<div id="caption"></div>
+</div>
 
-<script src="~/js/chatting.js"></script>
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/Chatting_v2.js"></script>
+<script src="~/js/ImageModal.js"></script>
