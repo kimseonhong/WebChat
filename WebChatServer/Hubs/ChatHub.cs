@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using System.Linq;
 
-namespace ChatServer.Hubs
+namespace WebChatServer.Hubs
 {
 	public enum MessageType
 	{
